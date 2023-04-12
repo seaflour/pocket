@@ -1,0 +1,20 @@
+PRAGMA foreign_keys = ON;
+
+DROP TABLE IF EXISTS mon;
+DROP TABLE IF EXISTS monType;
+
+CREATE TABLE mon (
+	id         INTEGER PRIMARY KEY AUTOINCREMENT,
+	createTime TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	dex        INTEGER NOT NULL,
+	monName    TEXT NOT NULL,
+	prime      INTEGER REFERENCES monType(id),
+	second     INTEGER REFERENCES monType(id),
+	evolves    INTEGER REFERENCES mon(id),
+	hidden     INTEGER NOT NULL DEFAULT FALSE
+);
+
+CREATE TABLE monType (
+	id       INTEGER PRIMARY KEY,
+	typeName TEXT NOT NULL
+);
